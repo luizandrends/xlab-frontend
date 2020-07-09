@@ -48,12 +48,12 @@ const AuthProvider: React.FC = ({ children }) => {
   }, []);
 
   const signIn = useCallback(async ({ email, password }) => {
-    const response = await api.post('sessions', {
+    const response = await api.post('/users/authenticate', {
       email,
       password,
     });
 
-    const { token, user } = response.data;
+    const { user, token } = response.data;
 
     localStorage.setItem('@Xlab:token', token);
     localStorage.setItem('@Xlab:user', JSON.stringify(user));
@@ -65,7 +65,7 @@ const AuthProvider: React.FC = ({ children }) => {
 
   const updateUser = useCallback(
     (user: User) => {
-      localStorage.setItem('@GoBarber:user', JSON.stringify(user));
+      localStorage.setItem('@Xlab:user', JSON.stringify(user));
 
       setData({
         token: data.token,
