@@ -36,7 +36,7 @@ export const AnimationContainer = styled.div`
     text-align: center;
   }
   > a {
-    color: #ffff;
+    color: #fff;
     display: block;
     margin-top: 15px;
     text-decoration: none;

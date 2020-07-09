@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { shade } from 'polished';
 
 export const Container = styled.div`
   display: flex;
@@ -44,6 +45,16 @@ export const Content = styled.div`
     align-items: center;
     animation: ${appearFromRight} 1.5s;
 
+    a {
+      text-decoration: none;
+      color: #fff;
+      transition: color 0.4s;
+
+      &:hover {
+        color: ${shade(0.4, '#fff')};
+      }
+    }
+
     #debts {
       margin-right: 20px;
       padding-right: 20px;
@@ -63,7 +74,6 @@ export const Content = styled.div`
 
     small {
       font-size: 20px;
-
       margin-right: 20px;
       padding-right: 20px;
       border-right: 1px solid rgba(255, 255, 255, 0.2);
