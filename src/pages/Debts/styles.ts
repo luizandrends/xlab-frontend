@@ -23,7 +23,7 @@ export const SearchContainer = styled.div`
     align-self: flex-start;
   }
 
-  .find-debtor {
+  .find-debt {
     display: flex;
     width: 100%;
 
@@ -89,6 +89,28 @@ export const Content = styled.div`
       border-bottom: 0.1px solid rgba(255, 255, 255, 0.2);
 
       .debtor {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+
+        strong {
+          font-size: 18px;
+        }
+
+        span {
+          font-size: 16px;
+          margin-top: 10px;
+          color: #666;
+        }
+
+        small {
+          font-size: 14px;
+          margin-top: 5px;
+          color: #666;
+        }
+      }
+
+      .debt {
         display: flex;
         flex-direction: column;
         text-align: left;

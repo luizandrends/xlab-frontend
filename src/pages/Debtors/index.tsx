@@ -7,7 +7,7 @@ import api from '../../services/api';
 
 import { Container, SearchContainer, Content } from './styles';
 
-interface Debtor {
+export interface Debtor {
   id: string;
   name: string;
   email: string;
@@ -27,7 +27,7 @@ const Debtors: React.FC = () => {
     <Container>
       <Header />
       <SearchContainer>
-        <h1>Lista de Devedores</h1>
+        <h1>Lista de devedores</h1>
         <div className="find-debtor">
           <input type="text" placeholder="Informe o nome do devedor" />
           <button type="submit">BUSCAR</button>
