@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FiUser } from 'react-icons/fi';
+import { FiUser, FiHome } from 'react-icons/fi';
 
 import { Container, Content } from './styles';
 
@@ -18,6 +18,11 @@ const Header: React.FC = () => {
           </Link>
           <Link to="debtors">
             <span>Devedores</span>
+          </Link>
+        </div>
+        <div className="dashboard">
+          <Link to="dashboard">
+            <FiHome size={25} color="#fff" />
           </Link>
         </div>
         <div className="profile">
