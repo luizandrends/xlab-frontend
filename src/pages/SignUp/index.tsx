@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
+import { FiArrowLeft, FiMail, FiUser, FiLock } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
-import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
 import { Form } from '@unform/web';
 import { Link } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ import { Container, Content, AnimationContainer } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-const SignIn: React.FC = () => {
+const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
   return (
@@ -22,6 +22,7 @@ const SignIn: React.FC = () => {
               console.log('submit');
             }}
           >
+            <Input name="name" icon={FiUser} placeholder="Nome" />
             <Input name="email" icon={FiMail} placeholder="E-mail" />
             <Input
               name="password"
@@ -29,11 +30,13 @@ const SignIn: React.FC = () => {
               type="password"
               placeholder="Senha"
             />
-            <Button type="submit">Entrar</Button>
+
+            <Button type="submit">Cadastrar</Button>
           </Form>
-          <Link to="/register">
-            <FiLogIn />
-            Criar conta
+
+          <Link to="/">
+            <FiArrowLeft />
+            Voltar para logon
           </Link>
         </AnimationContainer>
       </Content>
@@ -41,4 +44,4 @@ const SignIn: React.FC = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;
