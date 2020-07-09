@@ -88,10 +88,10 @@ export const Content = styled.div`
       padding-bottom: 20px;
       border-bottom: 0.1px solid rgba(255, 255, 255, 0.2);
 
-      .debtor {
+      .debt {
         display: flex;
         flex-direction: column;
-        text-align: center;
+        text-align: left;
 
         strong {
           font-size: 18px;
@@ -110,10 +110,10 @@ export const Content = styled.div`
         }
       }
 
-      .debt {
+      .debtor {
         display: flex;
         flex-direction: column;
-        text-align: left;
+        text-align: center;
 
         strong {
           font-size: 18px;

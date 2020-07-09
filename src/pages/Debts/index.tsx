@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FiEdit, FiTrash } from 'react-icons/fi';
+import { FiEdit, FiTrash, FiArrowRight } from 'react-icons/fi';
 
 import Header from '../../components/Header';
 
@@ -54,7 +54,7 @@ const Debts: React.FC = () => {
               <div className="options">
                 <FiEdit size={22} color="#fff" />
                 <FiTrash size={22} color="#fff" />
-                <button type="submit">Detalhes</button>
+                <FiArrowRight size={22} color="#fff" />
               </div>
             </div>
           ))}
