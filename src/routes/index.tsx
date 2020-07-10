@@ -18,8 +18,8 @@ const Routes: React.FC = () => (
     <Route path="/register" component={SignUp} />
 
     <Route path="/dashboard" isPrivate component={Dashboard} />
-    <Route path="/debts" isPrivate component={Debts} />
-    <Route path="/debtors" isPrivate component={Debtors} />
+    <Route path="/debts" exact isPrivate component={Debts} />
+    <Route path="/debtors" exact isPrivate component={Debtors} />
     <Route
       path="/debtors/detail/:debtor_id"
       isPrivate
