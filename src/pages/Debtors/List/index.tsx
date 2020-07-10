@@ -80,28 +80,32 @@ const List: React.FC = () => {
       </SearchContainer>
       <Content>
         <div className="list-container">
-          {debtors.map(debtor => (
-            <div className="item" key={debtor.id}>
-              <div className="debtor">
-                <strong>{debtor.name}</strong>
-                <span>{debtor.email}</span>
-                <small>{debtor.cpf}</small>
+          {debtors.length === 0 ? (
+            <span>Você não possui devedores cadastrados</span>
+          ) : (
+            debtors.map(debtor => (
+              <div className="item" key={debtor.id}>
+                <div className="debtor">
+                  <strong>{debtor.name}</strong>
+                  <span>{debtor.email}</span>
+                  <small>{debtor.cpf}</small>
+                </div>
+                <div className="options">
+                  <button
+                    type="submit"
+                    onClick={() => {
+                      handleDeleteDebtor(debtor.id);
+                    }}
+                  >
+                    <FiTrash size={22} color="#fff" />
+                  </button>
+                  <Link to={`/debtors/detail/${debtor.id}`}>
+                    <FiArrowRight size={22} color="#fff" />
+                  </Link>
+                </div>
               </div>
-              <div className="options">
-                <button
-                  type="submit"
-                  onClick={() => {
-                    handleDeleteDebtor(debtor.id);
-                  }}
-                >
-                  <FiTrash size={22} color="#fff" />
-                </button>
-                <Link to={`/debtors/detail/${debtor.id}`}>
-                  <FiArrowRight size={22} color="#fff" />
-                </Link>
-              </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </Content>
     </Container>

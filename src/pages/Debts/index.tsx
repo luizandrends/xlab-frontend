@@ -81,26 +81,30 @@ const Debts: React.FC = () => {
       </SearchContainer>
       <Content>
         <div className="list-container">
-          {debts.map(debt => (
-            <div className="item" key={debt.id}>
-              <div className="debt">
-                <strong>{debt.debt_reason}</strong>
-                <span>{debt.debtor.name}</span>
-                <small>{debt.value}</small>
+          {debts.length === 0 ? (
+            <span>Você ainda não cadastrou nenhuma dívida.</span>
+          ) : (
+            debts.map(debt => (
+              <div className="item" key={debt.id}>
+                <div className="debt">
+                  <strong>{debt.debt_reason}</strong>
+                  <span>{debt.debtor.name}</span>
+                  <small>{debt.value}</small>
+                </div>
+                <div className="options">
+                  <button
+                    onClick={() => {
+                      handleDeleteDebt(debt.id);
+                    }}
+                    type="submit"
+                  >
+                    <FiTrash size={22} color="#fff" />
+                  </button>
+                  <FiArrowRight size={22} color="#fff" />
+                </div>
               </div>
-              <div className="options">
-                <button
-                  onClick={() => {
-                    handleDeleteDebt(debt.id);
-                  }}
-                  type="submit"
-                >
-                  <FiTrash size={22} color="#fff" />
-                </button>
-                <FiArrowRight size={22} color="#fff" />
-              </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </Content>
     </Container>
