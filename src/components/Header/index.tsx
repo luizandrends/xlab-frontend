@@ -13,21 +13,21 @@ const Header: React.FC = () => {
     <Container>
       <Content>
         <div className="links">
-          <Link to="debts">
+          <Link to="/debts">
             <span id="debts">Dívidas</span>
           </Link>
-          <Link to="debtors">
+          <Link to="/debtors">
             <span>Devedores</span>
           </Link>
         </div>
         <div className="dashboard">
-          <Link to="dashboard">
+          <Link to="/dashboard">
             <FiHome size={25} color="#fff" />
           </Link>
         </div>
         <div className="profile">
           <small>Olá, {user.name}</small>
-          <Link to="profile">
+          <Link to="/profile">
             <FiUser size={25} color="#fff" />
           </Link>
         </div>
