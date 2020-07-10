@@ -25,7 +25,13 @@ const List: React.FC = () => {
   const { addToast } = useToast();
 
   const handleDeleteDebtor = async (id: string): Promise<void> => {
-    await api.delete(`/debtors/delete/${id}`);
+    const alert = window.confirm(
+      'Tem certeza que deseja deletar este devedor?',
+    );
+
+    if (alert === true) {
+      await api.delete(`/debtors/delete/${id}`);
+    }
   };
 
   useEffect(() => {
