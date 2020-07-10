@@ -24,6 +24,11 @@ export const Content = styled.div`
         width: 190px;
         height: 50px;
         margin-left: 20px;
+
+        a {
+          text-decoration: none;
+          color: #fff;
+        }
       }
     }
   }

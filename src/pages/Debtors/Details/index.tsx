@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { FiUser, FiMail, FiUserCheck } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
+import * as Yup from 'yup';
 import { useParams } from 'react-router-dom';
 
 import Header from '../../../components/Header';
@@ -16,6 +17,7 @@ import Input from '../../../components/Input';
 import Button from '../../../components/Button';
 
 import { cpfMask } from '../../../components/CpfMask';
+import getValidationErrors from '../../../utils/getValidationError';
 
 interface Debtor {
   name: string;
@@ -59,6 +61,28 @@ const Details: React.FC = () => {
   const handleSubmit = useCallback(
     async (data: Debtor) => {
       try {
+        formRef.current?.setErrors({});
+
+        const schema = Yup.object().shape({
+          name: Yup.string(),
+          email: Yup.string().email('Digite um e-mail válido'),
+          cpf: Yup.string(),
+        });
+
+        await schema.validate(data, {
+          abortEarly: false,
+        });
+
+        if (data.email === '' && data.name === '' && data.cpf === '') {
+          addToast({
+            type: 'error',
+            title: 'Erro na atualização',
+            description: 'Preencha os campos para proseguir',
+          });
+
+          return;
+        }
+
         await api.put(`/debtors/update/${debtor_id}`, data);
 
         addToast({
@@ -67,6 +91,14 @@ const Details: React.FC = () => {
           description: 'Informações do devedor foram atualizadas com sucesso!',
         });
       } catch (err) {
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(err);
+
+          formRef.current?.setErrors(errors);
+
+          return;
+        }
+
         addToast({
           type: 'error',
           title: 'Erro na atualização',

@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import { FiUser, FiBookmark, FiDollarSign, FiCalendar } from 'react-icons/fi';
@@ -8,8 +9,6 @@ import Button from '../../components/Button';
 import SelecInput from '../../components/SelectInput';
 
 import api from '../../services/api';
-
-import getValidationErrors from '../../utils/getValidationError';
 
 import { Container, Content } from './styles';
 
@@ -68,7 +67,9 @@ const Dashboard: React.FC = () => {
             placeholder="Data"
           />
           <div className="buttons">
-            <Button type="submit">Registrar devedor</Button>
+            <Link to="/create/debtors">
+              <Button type="submit">Criar devedor</Button>
+            </Link>
             <Button type="submit">Salvar</Button>
           </div>
         </Form>

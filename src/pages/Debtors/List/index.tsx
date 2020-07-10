@@ -31,6 +31,8 @@ const List: React.FC = () => {
 
     if (alert === true) {
       await api.delete(`/debtors/delete/${id}`);
+
+      window.location.reload();
     }
   };
 
