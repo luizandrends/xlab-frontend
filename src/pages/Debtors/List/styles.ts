@@ -125,17 +125,8 @@ export const Content = styled.div`
         }
 
         button {
-          padding: 4px 15px;
           border: 0;
-          border-radius: 4px;
-          background: rgba(255, 255, 255, 0.2);
-          color: #fff;
-          font-weight: thin;
-          transition: background 0.4s;
-
-          &:hover {
-            background: ${shade(0.2, 'rgba(255, 255, 255, 0.2)')};
-          }
+          background: transparent;
         }
       }
     }

@@ -7,7 +7,7 @@ import api from '../../services/api';
 
 import { Container, SearchContainer, Content } from './styles';
 
-import { Debtor } from '../Debtors';
+import { Debtor } from '../Debtors/List';
 
 interface Debt {
   id: string;

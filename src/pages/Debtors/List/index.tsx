@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { FiEdit, FiTrash } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
+import { FiTrash, FiArrowRight } from 'react-icons/fi';
 
-import Header from '../../components/Header';
+import Header from '../../../components/Header';
 
-import api from '../../services/api';
+import api from '../../../services/api';
 
-import { useToast } from '../../hooks/toast';
+import { useToast } from '../../../hooks/toast';
 
 import { Container, SearchContainer, Content } from './styles';
 
@@ -16,12 +17,16 @@ export interface Debtor {
   cpf: string;
 }
 
-const Debtors: React.FC = () => {
+const List: React.FC = () => {
   const [debtors, setDebtors] = useState<Debtor[]>([]);
   const [search, setSearch] = useState('/debtors/list');
   const [name, setName] = useState('');
 
   const { addToast } = useToast();
+
+  const handleDeleteDebtor = async (id: string): Promise<void> => {
+    await api.delete(`/debtors/delete/${id}`);
+  };
 
   useEffect(() => {
     async function loadDebtors(): Promise<void> {
@@ -75,9 +80,17 @@ const Debtors: React.FC = () => {
                 <small>{debtor.cpf}</small>
               </div>
               <div className="options">
-                <FiEdit size={22} color="#fff" />
-                <FiTrash size={22} color="#fff" />
-                <button type="submit">Detalhes</button>
+                <button
+                  type="submit"
+                  onClick={() => {
+                    handleDeleteDebtor(debtor.id);
+                  }}
+                >
+                  <FiTrash size={22} color="#fff" />
+                </button>
+                <Link to={`/debtors/detail/${debtor.id}`}>
+                  <FiArrowRight size={22} color="#fff" />
+                </Link>
               </div>
             </div>
           ))}
@@ -87,4 +100,4 @@ const Debtors: React.FC = () => {
   );
 };
 
-export default Debtors;
+export default List;

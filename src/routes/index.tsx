@@ -8,7 +8,8 @@ import SignUp from '../pages/SignUp';
 
 import Dashboard from '../pages/Dashboard';
 import Debts from '../pages/Debts';
-import Debtors from '../pages/Debtors';
+import Debtors from '../pages/Debtors/List';
+import DebtorDetail from '../pages/Debtors/Details';
 import Profile from '../pages/Profile';
 
 const Routes: React.FC = () => (
@@ -19,6 +20,11 @@ const Routes: React.FC = () => (
     <Route path="/dashboard" isPrivate component={Dashboard} />
     <Route path="/debts" isPrivate component={Debts} />
     <Route path="/debtors" isPrivate component={Debtors} />
+    <Route
+      path="/debtors/detail/:debtor_id"
+      isPrivate
+      component={DebtorDetail}
+    />
     <Route path="/profile" isPrivate component={Profile} />
   </Switch>
 );
