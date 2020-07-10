@@ -32,7 +32,11 @@ const List: React.FC = () => {
     if (alert === true) {
       await api.delete(`/debtors/delete/${id}`);
 
-      window.location.reload();
+      addToast({
+        type: 'success',
+        title: 'Devedor deletado com sucesso',
+        description: '',
+      });
     }
   };
 
