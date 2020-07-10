@@ -110,5 +110,17 @@ export const Content = styled.div`
       padding-right: 20px;
       border-right: 1px solid rgba(255, 255, 255, 0.2);
     }
+
+    button {
+      margin-left: 20px;
+      width: 100px;
+      padding: 8px;
+      color: #fff;
+      font-weight: bold;
+
+      border: 0;
+      border-radius: 4px;
+      background: #f64c75;
+    }
   }
 `;

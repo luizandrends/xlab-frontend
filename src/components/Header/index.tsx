@@ -7,7 +7,11 @@ import { Container, Content } from './styles';
 import { useAuth } from '../../hooks/auth';
 
 const Header: React.FC = () => {
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
+
+  const handleLogOut = (): void => {
+    signOut();
+  };
 
   return (
     <Container>
@@ -30,6 +34,14 @@ const Header: React.FC = () => {
           <Link to="/profile">
             <FiUser size={25} color="#fff" />
           </Link>
+          <button
+            onClick={() => {
+              handleLogOut();
+            }}
+            type="submit"
+          >
+            SAIR
+          </button>
         </div>
       </Content>
     </Container>
