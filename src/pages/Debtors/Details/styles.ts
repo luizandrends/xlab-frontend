@@ -15,6 +15,11 @@ export const Content = styled.div`
   width: 100%;
 
   margin-top: 60px;
+
+  h1 {
+    margin-top: 20px;
+    align-self: flex-start;
+  }
 `;
 
 export const Debtor = styled.div`
@@ -63,6 +68,13 @@ export const Debts = styled.div`
   border-radius: 4px;
 
   margin-bottom: 20px;
+
+  .without-debt {
+    small {
+      font-size: 16px;
+      color: #666;
+    }
+  }
 
   .item {
     display: flex;

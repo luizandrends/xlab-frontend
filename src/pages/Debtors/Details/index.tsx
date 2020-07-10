@@ -109,16 +109,23 @@ const Details: React.FC = () => {
             <Button type="submit">Alterar</Button>
           </Form>
         </Debtor>
+        <h1>Dividas</h1>
         <Debts>
-          {debts.map(debt => (
-            <div className="item" key={debt.id}>
-              <div className="debt">
-                <strong>{debt.debt_reason}</strong>
-                <span>{debt.value}</span>
-                <small>{debt.date}</small>
-              </div>
+          {debts.length === 0 ? (
+            <div className="without-debt">
+              <small>Nenhuma divida encontrada no nome de {debtor?.name}</small>
             </div>
-          ))}
+          ) : (
+            debts.map(debt => (
+              <div className="item" key={debt.id}>
+                <div className="debt">
+                  <strong>{debt.debt_reason}</strong>
+                  <span>{debt.value}</span>
+                  <small>{debt.date}</small>
+                </div>
+              </div>
+            ))
+          )}
         </Debts>
       </Content>
     </Container>
