@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { shade } from 'polished';
 
 export const Container = styled.div`
   display: flex;
@@ -19,10 +20,6 @@ export const SearchContainer = styled.div`
   max-width: 1024px;
   width: 100%;
 
-  h1 {
-    align-self: flex-start;
-  }
-
   .find-debtor {
     display: flex;
     width: 100%;
@@ -30,11 +27,13 @@ export const SearchContainer = styled.div`
     margin-top: 10px;
 
     input {
-      width: 90%;
+      width: 80%;
       padding: 10px 10px;
       border: 2px solid #232129;
       background: #232129;
+      color: #fff;
       border-radius: 4px;
+      box-shadow: 0 7px 12px rgba(0, 0, 0, 0.13);
 
       &::placeholder {
         color: #666360;
@@ -42,13 +41,19 @@ export const SearchContainer = styled.div`
     }
 
     button {
-      width: 10%;
-      border: 0;
-      background: #232129;
-      border-radius: 4px;
       margin-left: 10px;
-      color: #666360;
-      font-weight: bold;
+      width: 200px;
+
+      border: 0px;
+      background: #1c1a21;
+      border-radius: 4px;
+      color: #fff;
+      transition: background 0.4s;
+      box-shadow: 0 7px 12px rgba(0, 0, 0, 0.13);
+
+      &:hover {
+        background: ${shade(0.2, '#1c1a21')};
+      }
     }
   }
 `;
@@ -123,9 +128,14 @@ export const Content = styled.div`
           padding: 4px 15px;
           border: 0;
           border-radius: 4px;
-          background: #fff;
-          color: #666;
-          font-weight: bold;
+          background: rgba(255, 255, 255, 0.2);
+          color: #fff;
+          font-weight: thin;
+          transition: background 0.4s;
+
+          &:hover {
+            background: ${shade(0.2, 'rgba(255, 255, 255, 0.2)')};
+          }
         }
       }
     }

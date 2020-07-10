@@ -5,6 +5,8 @@ import Header from '../../components/Header';
 
 import api from '../../services/api';
 
+import { useToast } from '../../hooks/toast';
+
 import { Container, SearchContainer, Content } from './styles';
 
 export interface Debtor {
@@ -16,21 +18,51 @@ export interface Debtor {
 
 const Debtors: React.FC = () => {
   const [debtors, setDebtors] = useState<Debtor[]>([]);
+  const [search, setSearch] = useState('/debtors/list');
+  const [name, setName] = useState('');
+
+  const { addToast } = useToast();
 
   useEffect(() => {
-    api.get('/debtors/list').then(response => {
-      setDebtors(response.data);
-    });
-  }, [debtors]);
+    async function loadDebtors(): Promise<void> {
+      try {
+        const response = await api.get(search);
+        setDebtors(response.data);
+      } catch (err) {
+        addToast({
+          type: 'error',
+          title: 'Devedor nao encontrado',
+          description: 'Por favor verifique seus dados',
+        });
+
+        setSearch('debtors/list');
+      }
+    }
+
+    loadDebtors();
+  }, [search, addToast]);
 
   return (
     <Container>
       <Header />
       <SearchContainer>
-        <h1>Lista de devedores</h1>
         <div className="find-debtor">
-          <input type="text" placeholder="Informe o nome do devedor" />
-          <button type="submit">BUSCAR</button>
+          <input
+            type="text"
+            placeholder="Informe o nome do devedor"
+            value={name}
+            onChange={({ currentTarget }) => {
+              setName(currentTarget.value);
+            }}
+          />
+          <button
+            type="submit"
+            onClick={() => {
+              setSearch(`/debtors/find/${name}`);
+            }}
+          >
+            BUSCAR
+          </button>
         </div>
       </SearchContainer>
       <Content>
