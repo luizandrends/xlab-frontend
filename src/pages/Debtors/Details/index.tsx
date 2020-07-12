@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { FiUser, FiMail, FiUserCheck } from 'react-icons/fi';
+import { FiUser, FiMail, FiUserCheck, FiArrowRight } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
+import moment from 'moment';
 
 import Header from '../../../components/Header';
 
@@ -16,10 +17,9 @@ import { Container, Content, Debtor, Debts } from './styles';
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
 
-import { cpfMask } from '../../../components/CpfMask';
 import getValidationErrors from '../../../utils/getValidationError';
 
-interface Debtor {
+interface DebtorFormData {
   name: string;
   email: string;
   cpf: string;
@@ -33,9 +33,9 @@ interface Debts {
 }
 
 const Details: React.FC = () => {
-  const [debtor, setDebtor] = useState<Debtor>();
+  const [debtor, setDebtor] = useState<DebtorFormData>();
   const [debts, setDebts] = useState<Debts[]>([]);
-  const [cpf, setCpf] = useState('');
+  // const [cpf, setCpf] = useState('');
 
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
@@ -51,7 +51,16 @@ const Details: React.FC = () => {
     const handleGetDebtsFromDebtor = async (): Promise<void> => {
       const response = await api.get(`debts/list/debtor/${debtor_id}`);
 
-      setDebts(response.data);
+      const debtsResponse = response.data.map((debt: Debts) => {
+        return {
+          id: debt.id,
+          debt_reason: debt.debt_reason,
+          date: moment(debt.date).format('DD/MM/YYYY'),
+          value: debt.value,
+        };
+      });
+
+      setDebts(debtsResponse);
     };
 
     handleLoadDebtor();
@@ -59,14 +68,14 @@ const Details: React.FC = () => {
   }, [debtor_id]);
 
   const handleSubmit = useCallback(
-    async (data: Debtor) => {
+    async (data: DebtorFormData) => {
       try {
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
-          name: Yup.string(),
-          email: Yup.string().email('Digite um e-mail válido'),
-          cpf: Yup.string(),
+          name: Yup.string().required(),
+          email: Yup.string().email('Digite um e-mail válido').required(),
+          cpf: Yup.string().required(),
         });
 
         await schema.validate(data, {
@@ -83,11 +92,15 @@ const Details: React.FC = () => {
           return;
         }
 
-        await api.put(`/debtors/update/${debtor_id}`, data);
+        const { name, email, cpf } = data;
+
+        const formData = { name, email, cpf };
+
+        await api.put(`/debtors/update/${debtor_id}`, formData);
 
         addToast({
           type: 'success',
-          title: 'Perfil atualizado!',
+          title: 'Devedir atualizado!',
           description: 'Informações do devedor foram atualizadas com sucesso!',
         });
       } catch (err) {
@@ -115,28 +128,27 @@ const Details: React.FC = () => {
       <Header />
       <Content>
         <Debtor>
-          <Form ref={formRef} onSubmit={handleSubmit}>
-            <Input
-              name="name"
-              type="text"
-              placeholder={debtor?.name}
-              icon={FiUser}
-            />
+          <Form
+            ref={formRef}
+            initialData={{
+              name: debtor?.name,
+              email: debtor?.email,
+              cpf: debtor?.cpf,
+            }}
+            onSubmit={handleSubmit}
+          >
+            <Input name="name" type="text" placeholder="Nome" icon={FiUser} />
             <Input
               name="email"
               type="email"
-              placeholder={debtor?.email}
+              placeholder="E-mail"
               icon={FiMail}
             />
             <Input
               name="cpf"
               type="text"
-              value={cpf}
-              placeholder={debtor?.cpf}
+              placeholder="CPF"
               icon={FiUserCheck}
-              onChange={({ currentTarget }) => {
-                setCpf(cpfMask(currentTarget.value));
-              }}
             />
             <Button type="submit">Alterar</Button>
           </Form>
@@ -154,6 +166,11 @@ const Details: React.FC = () => {
                   <strong>{debt.debt_reason}</strong>
                   <span>{debt.value}</span>
                   <small>{debt.date}</small>
+                </div>
+                <div className="redirect">
+                  <Link to={`/debts/detail/${debt.id}`}>
+                    <FiArrowRight size={22} color="#fff" />
+                  </Link>
                 </div>
               </div>
             ))

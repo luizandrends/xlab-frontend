@@ -11,53 +11,23 @@ interface ContainerProps {
 export const Container = styled.div<ContainerProps>`
   background: #232129;
   border-radius: 10px;
-
-  width: 100%;
+  padding: 16px;
   border: 2px solid #232129;
   color: #666360;
+  width: 100%;
   display: flex;
   align-items: center;
 
-  .css-2b097c-container {
-    width: 100%;
+  .react-datepicker__input-container {
+  width: inherit;
+}
 
-    .react-select__control {
-      background: #232129;
-      border: 2px solid #232129;
-      padding: 8px;
+.react-datepicker-wrapper {
+  width: 100%;
+}
 
-      .react-select__single-value {
-        color: #fff;
-      }
-    }
-
-    .react-select__menu {
-      width: 100%;
-      max-height: 300px;
-
-      .react-select__menu-list {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        height: 100%;
-        background: #232129;
-
-        padding: 15px;
-
-        .react-select__option {
-          display: flex;
-          flex-direction: column;
-          height: 50px;
-          background: none;
-          padding-bottom: 5px;
-          margin-bottom: 5px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.6);
-
-          padding: 15px;
-        }
-      }
-    }
+  input {
+    border: solid 3px;
   }
 
   & + div {

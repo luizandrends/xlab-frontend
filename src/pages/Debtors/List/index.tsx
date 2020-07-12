@@ -30,13 +30,21 @@ const List: React.FC = () => {
     );
 
     if (alert === true) {
-      await api.delete(`/debtors/delete/${id}`);
+      try {
+        await api.delete(`/debtors/delete/${id}`);
 
-      addToast({
-        type: 'success',
-        title: 'Devedor deletado com sucesso',
-        description: '',
-      });
+        addToast({
+          type: 'success',
+          title: 'Devedor deletado com sucesso',
+          description: '',
+        });
+      } catch (err) {
+        addToast({
+          type: 'error',
+          title: 'Devedor com dívidas em ativo',
+          description: 'Para deletar este devedor, delete suas dividas',
+        });
+      }
     }
   };
 
@@ -66,7 +74,7 @@ const List: React.FC = () => {
         <div className="find-debtor">
           <input
             type="text"
-            placeholder="Informe o nome do devedor"
+            placeholder="Informe o nome completo do devedor"
             value={name}
             onChange={({ currentTarget }) => {
               setName(currentTarget.value);

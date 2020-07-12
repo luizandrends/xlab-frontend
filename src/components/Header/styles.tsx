@@ -51,6 +51,8 @@ export const Content = styled.div`
   width: 100%;
   max-width: 1024px;
 
+  padding: 0 20px;
+
   .links {
     display: flex;
     align-items: center;
@@ -104,11 +106,19 @@ export const Content = styled.div`
     align-items: center;
     animation: ${appearFromLeft} 1.5s;
 
+    @media (max-width: 560px) {
+      flex-direction: column;
+    }
+
     small {
       font-size: 20px;
       margin-right: 20px;
       padding-right: 20px;
       border-right: 1px solid rgba(255, 255, 255, 0.2);
+
+      @media (max-width: 560px) {
+        display: none;
+      }
     }
 
     button {
@@ -121,6 +131,10 @@ export const Content = styled.div`
       border: 0;
       border-radius: 4px;
       background: #f64c75;
+
+      @media (max-width: 560px) {
+        display: none;
+      }
     }
   }
 `;

@@ -7,7 +7,8 @@ import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 
 import Dashboard from '../pages/Dashboard';
-import Debts from '../pages/Debts';
+import Debts from '../pages/Debts/List';
+import DebtDetail from '../pages/Debts/Details';
 import Debtors from '../pages/Debtors/List';
 import DebtorDetail from '../pages/Debtors/Details';
 import CreateDebtor from '../pages/Debtors/Create';
@@ -20,6 +21,12 @@ const Routes: React.FC = () => (
 
     <Route path="/dashboard" isPrivate component={Dashboard} />
     <Route path="/debts" exact isPrivate component={Debts} />
+    <Route
+      path="/debts/detail/:debt_id"
+      exact
+      isPrivate
+      component={DebtDetail}
+    />
     <Route path="/debtors" exact isPrivate component={Debtors} />
     <Route path="/create/debtors" exact isPrivate component={CreateDebtor} />
     <Route

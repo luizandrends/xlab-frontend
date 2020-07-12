@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { FiTrash, FiArrowRight } from 'react-icons/fi';
 
-import Header from '../../components/Header';
+import Header from '../../../components/Header';
 
-import api from '../../services/api';
+import api from '../../../services/api';
 
-import { useToast } from '../../hooks/toast';
+import { useToast } from '../../../hooks/toast';
 
 import { Container, SearchContainer, Content } from './styles';
 
-import { Debtor } from '../Debtors/List';
+import { Debtor } from '../../Debtors/List';
 
 interface Debt {
   id: string;
@@ -33,7 +34,11 @@ const Debts: React.FC = () => {
     if (alert === true) {
       await api.delete(`/debts/delete/${id}`);
 
-      window.location.reload();
+      addToast({
+        type: 'success',
+        title: 'Dívida deletada com sucesso',
+        description: '',
+      });
     }
   };
 
@@ -89,7 +94,7 @@ const Debts: React.FC = () => {
                 <div className="debt">
                   <strong>{debt.debt_reason}</strong>
                   <span>{debt.debtor.name}</span>
-                  <small>{debt.value}</small>
+                  <small>{debt.value} R$</small>
                 </div>
                 <div className="options">
                   <button
@@ -100,7 +105,9 @@ const Debts: React.FC = () => {
                   >
                     <FiTrash size={22} color="#fff" />
                   </button>
-                  <FiArrowRight size={22} color="#fff" />
+                  <Link to={`/debts/detail/${debt.id}`}>
+                    <FiArrowRight size={22} color="#fff" />
+                  </Link>
                 </div>
               </div>
             ))

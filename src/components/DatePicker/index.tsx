@@ -1,34 +1,29 @@
-import React, {
-  InputHTMLAttributes,
-  useEffect,
-  useRef,
-  useState,
-  useCallback,
-} from 'react';
-
-import { IconBaseProps } from 'react-icons';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
+import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker';
 import { useField } from '@unform/core';
+import { IconBaseProps } from 'react-icons';
+import 'react-datepicker/dist/react-datepicker.css';
 
-import { Container } from './styles';
+import { Container, Error } from './styles';
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface Props extends Omit<ReactDatePickerProps, 'onChange'> {
   name: string;
   containerStyle?: object;
   icon?: React.ComponentType<IconBaseProps>;
 }
-
-const Input: React.FC<InputProps> = ({
+const DatePicker: React.FC<Props> = ({
   name,
   containerStyle = {},
   icon: Icon,
   ...rest
 }) => {
-  const inputRef = useRef<HTMLInputElement>(null);
-
+  const datepickerRef = useRef(null);
+  const { fieldName, registerField, defaultValue, error } = useField(name);
+  const [date, setDate] = useState(defaultValue || null);
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
 
-  const { fieldName, defaultValue, error, registerField } = useField(name);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleInputFocus = useCallback(() => {
     setIsFocused(true);
@@ -43,29 +38,29 @@ const Input: React.FC<InputProps> = ({
   useEffect(() => {
     registerField({
       name: fieldName,
-      ref: inputRef.current,
-      path: 'value',
+      ref: datepickerRef.current,
+      path: 'props.selected',
     });
   }, [fieldName, registerField]);
-
   return (
     <Container
       style={containerStyle}
       isErrored={!!error}
       isFilled={isFilled}
       isFocused={isFocused}
-      data-testid="input-container"
     >
       {Icon && <Icon size={20} />}
-      <input
+      <ReactDatePicker
+        ref={datepickerRef}
+        selected={date}
+        onChange={setDate}
+        dateFormat="d, MMMM yyyy"
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
-        defaultValue={defaultValue}
-        ref={inputRef}
         {...rest}
       />
+      {error && <Error title={error} />}
     </Container>
   );
 };
-
-export default Input;
+export default DatePicker;

@@ -1,11 +1,11 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import ReactSelect, {
   OptionTypeBase,
   Props as SelectProps,
 } from 'react-select';
 import { useField } from '@unform/core';
-import { IconBaseProps } from 'react-icons';
 
+import { IconBaseProps } from 'react-icons';
 import { Container } from './styles';
 
 interface Props extends SelectProps<OptionTypeBase> {
@@ -13,26 +13,11 @@ interface Props extends SelectProps<OptionTypeBase> {
   containerStyle?: object;
   icon?: React.ComponentType<IconBaseProps>;
 }
-const Select: React.FC<Props> = ({
-  name,
-  containerStyle = {},
-  icon: Icon,
-  ...rest
-}) => {
+const Select: React.FC<Props> = ({ name, containerStyle = {}, ...rest }) => {
   const selectRef = useRef(null);
 
-  const [isFocused, setIsFocused] = useState(false);
-  const [isFilled, setIsFilled] = useState(false);
-
-  const handleInputFocus = useCallback(() => {
-    setIsFocused(true);
-  }, []);
-
-  const handleInputBlur = useCallback(() => {
-    setIsFocused(false);
-
-    setIsFilled(!!selectRef.current);
-  }, []);
+  const [isFocused] = useState(false);
+  const [isFilled] = useState(false);
 
   const { fieldName, defaultValue, registerField, error } = useField(name);
   useEffect(() => {
@@ -59,11 +44,9 @@ const Select: React.FC<Props> = ({
       isErrored={!!error}
       isFilled={isFilled}
       isFocused={isFocused}
+      data-testid="input-container"
     >
-      {Icon && <Icon size={20} />}
       <ReactSelect
-        onFocus={handleInputFocus}
-        onBlur={handleInputBlur}
         defaultValue={defaultValue}
         ref={selectRef}
         classNamePrefix="react-select"

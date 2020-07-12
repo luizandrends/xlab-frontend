@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useRef, useCallback } from 'react';
 import { FiUser, FiMail, FiUserCheck } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
@@ -15,7 +15,6 @@ import { Container, Content, Debtor } from './styles';
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
 
-import { cpfMask } from '../../../components/CpfMask';
 import getValidationErrors from '../../../utils/getValidationError';
 
 interface CreateDebtorFormData {
@@ -25,8 +24,6 @@ interface CreateDebtorFormData {
 }
 
 const Create: React.FC = () => {
-  const [cpf, setCpf] = useState('');
-
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
 
@@ -90,12 +87,8 @@ const Create: React.FC = () => {
             <Input
               name="cpf"
               type="text"
-              value={cpf}
               placeholder="CPF"
               icon={FiUserCheck}
-              onChange={({ currentTarget }) => {
-                setCpf(cpfMask(currentTarget.value));
-              }}
             />
             <Button type="submit">Cadastrar</Button>
           </Form>

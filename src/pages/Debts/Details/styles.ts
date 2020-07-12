@@ -22,7 +22,7 @@ export const Content = styled.div`
   }
 `;
 
-export const Debtor = styled.div`
+export const Debt = styled.div`
   display: flex;
   flex-direction: column;
 
@@ -35,9 +35,17 @@ export const Debtor = styled.div`
   margin-bottom: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+
+  form {
+    .react-datepicker__input-container {
+      input {
+        width: 100%;
+      }
+    }
+  }
 `;
 
-export const Debts = styled.div`
+export const DebtDetails = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -54,13 +62,6 @@ export const Debts = styled.div`
 
   margin-bottom: 20px;
 
-  .without-debt {
-    small {
-      font-size: 16px;
-      color: #666;
-    }
-  }
-
   .item {
     display: flex;
     justify-content: space-between;
@@ -70,9 +71,18 @@ export const Debts = styled.div`
     padding-bottom: 20px;
     border-bottom: 0.1px solid rgba(255, 255, 255, 0.2);
 
+    @media (max-width: 360px) {
+      flex-direction: column;
+    }
+
     .debt {
       display: flex;
       flex-direction: column;
+
+      @media (max-width: 360px) {
+        text-align: left;
+        width: 100%;
+      }
 
       strong {
         font-size: 18px;
@@ -87,6 +97,25 @@ export const Debts = styled.div`
       small {
         font-size: 14px;
         margin-top: 5px;
+        color: #666;
+      }
+    }
+
+    .redirect {
+      display: flex;
+      align-items: center;
+
+      @media (max-width: 360px) {
+        text-align: left;
+        width: 100%;
+      }
+
+      strong {
+        margin-right: 10px;
+        padding-right: 10px;
+        border-right: 1px solid rgba(255, 255, 255, 0.6);
+
+        font-size: 18px;
         color: #666;
       }
     }
