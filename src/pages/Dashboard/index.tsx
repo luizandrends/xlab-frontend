@@ -143,6 +143,8 @@ const Dashboard: React.FC = () => {
             <DatePicker
               name="date"
               icon={FiCalendar}
+              locale="pt-BR"
+              dateFormat="PP"
               placeholderText="Data da dívida"
             />
           </div>

@@ -1,10 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import {
-  FiEdit2,
-  FiCalendar,
-  FiDollarSign,
-  FiArrowRight,
-} from 'react-icons/fi';
+import { FiEdit2, FiDollarSign, FiArrowRight } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
@@ -23,7 +18,6 @@ import Input from '../../../components/Input';
 import Button from '../../../components/Button';
 
 import getValidationErrors from '../../../utils/getValidationError';
-import DatePicker from '../../../components/DatePicker';
 
 interface Debtor {
   id: string;
@@ -43,7 +37,6 @@ interface Debt {
 
 const Details: React.FC = () => {
   const [debt, setDebt] = useState<Debt>();
-  const [dateInput, setDateInput] = useState<Date>();
 
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
@@ -128,11 +121,6 @@ const Details: React.FC = () => {
               type="text"
               placeholder="Motivo"
               icon={FiEdit2}
-            />
-            <DatePicker
-              name="date"
-              icon={FiCalendar}
-              placeholderText="Data da dívida"
             />
             <Input
               name="value"
