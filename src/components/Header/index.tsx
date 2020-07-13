@@ -30,7 +30,7 @@ const Header: React.FC = () => {
           </Link>
         </div>
         <div className="profile">
-          <small>Olá, {user.name}</small>
+          <small>{user.name}</small>
           <Link to="/profile">
             <FiUser size={25} color="#fff" />
           </Link>

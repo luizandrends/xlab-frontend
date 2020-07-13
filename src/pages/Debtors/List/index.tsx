@@ -6,6 +6,8 @@ import Header from '../../../components/Header';
 
 import api from '../../../services/api';
 
+import Button from '../../../components/Button';
+
 import { useToast } from '../../../hooks/toast';
 
 import { Container, SearchContainer, Content } from './styles';
@@ -93,7 +95,12 @@ const List: React.FC = () => {
       <Content>
         <div className="list-container">
           {debtors.length === 0 ? (
-            <span>Você não possui devedores cadastrados</span>
+            <div className="without-debtor">
+              <span>Você ainda não cadastrou nenhum devedor</span>
+              <Link to="/create/debtors">
+                <Button type="submit">Cadastrar</Button>
+              </Link>
+            </div>
           ) : (
             debtors.map(debtor => (
               <div className="item" key={debtor.id}>

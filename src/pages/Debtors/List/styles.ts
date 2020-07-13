@@ -84,6 +84,19 @@ export const Content = styled.div`
 
     text-align: center;
 
+    .without-debtor {
+      display: flex;
+      flex-direction: column;
+
+      span {
+        font-size: 22px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+      }
+    }
+
     .item {
       display: flex;
       justify-content: space-between;

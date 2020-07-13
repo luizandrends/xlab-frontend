@@ -132,7 +132,6 @@ const Details: React.FC = () => {
             <DatePicker
               name="date"
               icon={FiCalendar}
-              selected={dateInput}
               placeholderText="Data da dívida"
             />
             <Input

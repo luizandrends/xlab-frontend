@@ -106,17 +106,13 @@ export const Content = styled.div`
     align-items: center;
     animation: ${appearFromLeft} 1.5s;
 
-    @media (max-width: 560px) {
-      flex-direction: column;
-    }
-
     small {
       font-size: 20px;
       margin-right: 20px;
       padding-right: 20px;
       border-right: 1px solid rgba(255, 255, 255, 0.2);
 
-      @media (max-width: 560px) {
+      @media (max-width: 620px) {
         display: none;
       }
     }
@@ -132,7 +128,7 @@ export const Content = styled.div`
       border-radius: 4px;
       background: #f64c75;
 
-      @media (max-width: 560px) {
+      @media (max-width: 430px) {
         display: none;
       }
     }
